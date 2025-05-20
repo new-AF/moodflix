@@ -1,9 +1,9 @@
-import { setSearch } from "./store";
+import { useEffect } from "react";
+import { setSearch, setMovies } from "./store";
 import { useSelector, useDispatch } from "react-redux";
 
 export const MovieSearch = () => {
     const dispatch = useDispatch();
-    const apiKey = useSelector((state) => state.search.apiKey);
 
     return (
         <div className="max-w-md mx-auto flex flex-col gap-y-1">
