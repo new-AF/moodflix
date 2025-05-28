@@ -72,7 +72,10 @@ function App() {
             <main className="flex flex-col gap-y-10">
                 {/* App Hero image but only initially, and whenever search box is empty */}
                 {search === "" && (
-                    <div className="h-30 bg-repeat-x bg-[url('/hero.jpg')] bg-contain w-100 mx-auto opacity-90 rounded-md" />
+                    <img
+                        className="h-30 object-cover w-full mx-auto opacity-90 rounded-md"
+                        src="/hero.jpg"
+                    />
                 )}
 
                 {/* Search box */}
