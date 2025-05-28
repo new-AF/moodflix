@@ -15,28 +15,34 @@ function App() {
     const fetchComplete = useRef(false);
     const dispatch = useDispatch();
 
+    const callAPI = async () => {
+        console.log("callAPIing ... `callAPI`");
+        return;
+        const url = `http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`;
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.info(data, { movies });
+
+            dispatch(setMovies(data));
+            dispatch(setSearchComplete());
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
         // if (fetchComplete.current) return; // prevents double fetching because of <StrictMode> double-rendering and running useEffect. useRef persists across renders
 
-        fetchComplete.current = true;
+        /* delay/debounce */
+        const id = setTimeout(() => {
+            fetchComplete.current = true;
+            dispatch(setSearchRunning());
+            callAPI();
+        }, 500);
 
-        dispatch(setSearchRunning());
-
-        const call = async () => {
-            const url = `http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                console.info(data, { movies });
-
-                dispatch(setMovies(data));
-                dispatch(setSearchComplete());
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        call();
+        /* runs before every `search change/`re-render */
+        return () => clearTimeout(id);
     }, [search]);
 
     return (
@@ -45,14 +51,20 @@ function App() {
                 <Navbar title={"My Moodflix"} />
             </header>
 
-            <main className="flex flex-col gap-y-10">
+            <main className="flex flex-col gap-y-10 outline px-10">
                 <MovieSearch />
                 {searchRunning ? (
-                    <span className="daisy-loading daisy-loading-spinner daisy-loading-sm"></span>
+                    <span className="daisy-loading daisy-loading-spinner daisy-loading-sm mx-auto"></span>
                 ) : (
                     <MovieGallery search={search} list={movies} />
                 )}
             </main>
+
+            <footer className="daisy-footer daisy-sm:footer-horizontal daisy-footer-center  text-base-content p-4">
+                <aside>
+                    <p> Made with ❤️ by Abdullah Fatota</p>
+                </aside>
+            </footer>
         </>
     );
 }
