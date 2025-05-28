@@ -1,28 +1,36 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies, setSearchRunning, setSearchComplete } from "./store";
+import {
+    setMovies,
+    clearMovies,
+    setSearchRunning,
+    setSearchComplete,
+} from "./store";
 
 import { Navbar } from "./Navbar";
 import { MovieSearch } from "./MovieSearch";
-import { useRef } from "react";
 import { MovieGallery } from "./MovieGallery";
 
 function App() {
+    /* `search` is trimmed automatically */
     const search = useSelector((state) => state.search.searchValue);
     const movies = useSelector((state) => state.search.movies);
     const apiKey = useSelector((state) => state.search.apiKey);
     const searchRunning = useSelector((state) => state.search.searchRunning);
-    const fetchComplete = useRef(false);
     const dispatch = useDispatch();
 
     const callAPI = async () => {
-        console.log("callAPIing ... `callAPI`");
-        return;
+        /* console.log("callAPIing ... `callAPI`");
+        return; */
+
+        /* Open Movies DB API; search parameter */
         const url = `http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`;
         try {
             const response = await fetch(url);
+
+            /* data is an array of movie objects */
             const data = await response.json();
-            console.info(data, { movies });
+            console.info("API results", data);
 
             dispatch(setMovies(data));
             dispatch(setSearchComplete());
@@ -31,18 +39,22 @@ function App() {
         }
     };
 
+    /* will run once and then every time `search` changes */
     useEffect(() => {
-        // if (fetchComplete.current) return; // prevents double fetching because of <StrictMode> double-rendering and running useEffect. useRef persists across renders
+        if (search === "") return;
+
+        dispatch(setSearchRunning());
 
         /* delay/debounce */
         const id = setTimeout(() => {
-            fetchComplete.current = true;
-            dispatch(setSearchRunning());
             callAPI();
         }, 500);
 
         /* runs before every `search change/`re-render */
-        return () => clearTimeout(id);
+        return () => {
+            dispatch(clearMovies());
+            clearTimeout(id);
+        };
     }, [search]);
 
     return (
@@ -51,10 +63,12 @@ function App() {
                 <Navbar title={"My Moodflix"} />
             </header>
 
-            <main className="flex flex-col gap-y-10 outline px-10">
+            <main className="flex flex-col gap-y-10">
                 <MovieSearch />
-                {searchRunning ? (
+                {searchRunning === true ? (
                     <span className="daisy-loading daisy-loading-spinner daisy-loading-sm mx-auto"></span>
+                ) : search === "" ? (
+                    <span className="mx-auto"></span>
                 ) : (
                     <MovieGallery search={search} list={movies} />
                 )}

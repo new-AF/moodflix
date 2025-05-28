@@ -6,11 +6,12 @@ export const MovieSearch = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="max-w-md mx-auto flex flex-col gap-y-1">
+        <div className="w-md mx-auto flex flex-col gap-y-1 px-10">
             <label htmlFor="input-search-movies" className="daisy-label">
                 Search Movies
             </label>
             <input
+                /* update state `search` */
                 onChange={(e) => dispatch(setSearch(e.target.value))}
                 id="input-search-movies"
                 type="text"

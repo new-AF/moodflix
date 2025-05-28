@@ -2,9 +2,9 @@ import { MovieCard } from "./MovieCard";
 
 export const MovieGallery = ({ search, list }) => {
     return (
-        <section className="flex flex-col px-5 mx-auto outline">
+        <section className="flex flex-col px-5 mx-auto">
             <h2 className="py-10 font-bold text-2xl">
-                Result of search for "{search}":
+                Search results for "{search}":
             </h2>
             <ul className="flex flex-wrap gap-10">
                 {list.map((obj, index) => {

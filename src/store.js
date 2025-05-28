@@ -8,6 +8,7 @@ const initialState = {
     movies: [],
 };
 
+/* actual state */
 const slice = createSlice({
     name: "search slice",
     initialState,
@@ -15,7 +16,9 @@ const slice = createSlice({
     reducers: {
         setSearch: (state, action) => {
             const val = action.payload;
-            state.searchValue = val;
+            /* return trimmed */
+            const trimmed = val.trim();
+            state.searchValue = trimmed;
         },
         setMovies: (state, action) => {
             const obj = action.payload;
@@ -24,6 +27,11 @@ const slice = createSlice({
                     ? []
                     : obj.Search;
         },
+        /* useEffect cleanup function, clear movies before next re-render */
+        clearMovies: (state) => {
+            state.movies = [];
+        },
+
         setSearchRunning: (state) => {
             state.searchRunning = true;
         },
@@ -33,11 +41,18 @@ const slice = createSlice({
     },
 });
 
+/* initialize redux with the store */
 export const store = configureStore({
     reducer: {
         search: slice.reducer,
     },
 });
 
-export const { setSearch, setMovies, setSearchRunning, setSearchComplete } =
-    slice.actions;
+/* export state changers */
+export const {
+    setSearch,
+    setMovies,
+    clearMovies,
+    setSearchRunning,
+    setSearchComplete,
+} = slice.actions;
