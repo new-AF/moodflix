@@ -32,9 +32,12 @@ const slice = createSlice({
             state.movies = [];
         },
 
+        /* user is typing */
         setSearchRunning: (state) => {
             state.searchRunning = true;
         },
+
+        /* API fetch completed successfully */
         setSearchComplete: (state) => {
             state.searchRunning = false;
         },

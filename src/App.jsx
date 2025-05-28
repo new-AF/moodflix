@@ -41,7 +41,10 @@ function App() {
 
     /* will run once and then every time `search` changes */
     useEffect(() => {
-        if (search === "") return;
+        if (search === "") {
+            dispatch(setSearchComplete());
+            return;
+        }
 
         dispatch(setSearchRunning());
 
@@ -52,7 +55,10 @@ function App() {
 
         /* runs before every `search change/`re-render */
         return () => {
-            dispatch(clearMovies());
+            if (movies.length > 0) {
+                dispatch(clearMovies());
+                dispatch(setSearchComplete());
+            }
             clearTimeout(id);
         };
     }, [search]);
@@ -64,7 +70,15 @@ function App() {
             </header>
 
             <main className="flex flex-col gap-y-10">
+                {/* App Hero image but only initially, and whenever search box is empty */}
+                {search === "" && (
+                    <div className="h-30 bg-repeat-x bg-[url('/hero.jpg')] bg-contain w-100 mx-auto opacity-90 rounded-md" />
+                )}
+
+                {/* Search box */}
                 <MovieSearch />
+
+                {/* result of search, if successful then <MovieGallery /> */}
                 {searchRunning === true ? (
                     <span className="daisy-loading daisy-loading-spinner daisy-loading-sm mx-auto"></span>
                 ) : search === "" ? (
