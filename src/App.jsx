@@ -1,4 +1,7 @@
+const TMDB_READ_TOKEN = import.meta.env.VITE_TMDB_READ_TOKEN;
+
 import { useEffect } from "react";
+import { mergeClassNames } from "simple-merge-class-names";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setMovies,
@@ -23,10 +26,19 @@ function App() {
         /* console.log("callAPIing ... `callAPI`");
         return; */
 
-        /* Open Movies DB API; search parameter */
-        const url = `http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`;
+        /* TMDB API; query parameter */
+        const url = `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false`;
+
+        const options = {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                Authorization: `Bearer ${TMDB_READ_TOKEN}`,
+            },
+        };
+
         try {
-            const response = await fetch(url);
+            const response = await fetch(url, options);
 
             /* data is an array of movie objects */
             const data = await response.json();
@@ -69,7 +81,7 @@ function App() {
                 <Navbar title={"My Moodflix"} />
             </header>
 
-            <main className="flex flex-col gap-y-10">
+            <main className={mergeClassNames("flex", "flex-col", "gap-y-10")}>
                 {/* App Hero image but only initially, and whenever search box is empty */}
                 {search === "" && (
                     <img

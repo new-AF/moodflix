@@ -1,9 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-const apiKey = import.meta.env.VITE_OMDB_API_KEY;
 
 const initialState = {
     searchValue: "",
-    apiKey,
     searchRunning: false,
     movies: [],
 };
@@ -22,10 +20,8 @@ const slice = createSlice({
         },
         setMovies: (state, action) => {
             const obj = action.payload;
-            state.movies =
-                "Response" in obj === false || obj.Response === "False"
-                    ? []
-                    : obj.Search;
+            /* response key: 'results' */
+            state.movies = obj.results;
         },
         /* useEffect cleanup function, clear movies before next re-render */
         clearMovies: (state) => {
