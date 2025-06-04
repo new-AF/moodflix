@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setSearch, setMovies } from "./store";
+import { setSearch, setMovies } from "../store/store";
 import { useSelector, useDispatch } from "react-redux";
 
 export const MovieSearch = () => {
@@ -12,7 +12,7 @@ export const MovieSearch = () => {
             </label>
             <input
                 /* update state `search` */
-                onChange={(e) => dispatch(setSearch(e.target.value))}
+                // onChange={(e) => dispatch(setSearch(e.target.value))}
                 id="input-search-movies"
                 type="text"
                 className="daisy-input daisy-input-bordered w-full"

@@ -10,7 +10,7 @@ const initialState = {
 const slice = createSlice({
     name: "search slice",
     initialState,
-    /* update state */
+    /* state updaters/'event' handlers */
     reducers: {
         setSearch: (state, action) => {
             const val = action.payload;
@@ -47,7 +47,7 @@ export const store = configureStore({
     },
 });
 
-/* export state changers */
+/* export state updaters */
 export const {
     setSearch,
     setMovies,

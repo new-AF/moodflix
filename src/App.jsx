@@ -8,11 +8,12 @@ import {
     clearMovies,
     setSearchRunning,
     setSearchComplete,
-} from "./store";
+} from "./store/store";
 
-import { Navbar } from "./Navbar";
-import { MovieSearch } from "./MovieSearch";
-import { MovieGallery } from "./MovieGallery";
+import { Navbar } from "./components/Navbar";
+import { Hero } from "./components/Hero";
+import { MoodSelector } from "./components/MoodSelector";
+import { Footer } from "./components/Footer";
 
 function App() {
     /* `search` is trimmed automatically */
@@ -23,6 +24,7 @@ function App() {
     const dispatch = useDispatch();
 
     const callAPI = async () => {
+        return;
         /* console.log("callAPIing ... `callAPI`");
         return; */
 
@@ -52,63 +54,40 @@ function App() {
     };
 
     /* will run once and then every time `search` changes */
-    useEffect(() => {
-        if (search === "") {
-            dispatch(setSearchComplete());
-            return;
-        }
-
-        dispatch(setSearchRunning());
-
-        /* delay/debounce */
-        const id = setTimeout(() => {
-            callAPI();
-        }, 500);
-
-        /* runs before every `search change/`re-render */
-        return () => {
-            if (movies.length > 0) {
-                dispatch(clearMovies());
-                dispatch(setSearchComplete());
-            }
-            clearTimeout(id);
-        };
-    }, [search]);
+    useEffect(() => {}, []);
 
     return (
-        <>
+        <div
+            className={mergeClassNames(
+                "min-h-dvh",
+                "grid",
+                "grid-rows-[auto_1fr_auto]",
+                "gap-4"
+            )}
+        >
             <header>
                 <Navbar title={"My Moodflix"} />
+                <Hero />
             </header>
 
-            <main className={mergeClassNames("flex", "flex-col", "gap-y-10")}>
+            <main
+                className={mergeClassNames(
+                    "flex",
+                    "flex-col",
+                    "gap-y-10",
+                    "max-w-lg",
+                    "mx-auto"
+                )}
+            >
                 {/* App Hero image but only initially, and whenever search box is empty */}
-                {search === "" && (
-                    <img
-                        className="h-30 object-cover w-full mx-auto opacity-90 rounded-md"
-                        src="/hero.jpg"
-                    />
-                )}
-
+                <MoodSelector />
                 {/* Search box */}
-                <MovieSearch />
-
-                {/* result of search, if successful then <MovieGallery /> */}
-                {searchRunning === true ? (
-                    <span className="daisy-loading daisy-loading-spinner daisy-loading-sm mx-auto"></span>
-                ) : search === "" ? (
-                    <span className="mx-auto"></span>
-                ) : (
-                    <MovieGallery search={search} list={movies} />
-                )}
+                {/* <MovieSearch /> */}
+                {/* <MovieGallery search={search} list={movies} /> */}
             </main>
 
-            <footer className="daisy-footer daisy-sm:footer-horizontal daisy-footer-center  text-base-content p-4">
-                <aside>
-                    <p> Made with ❤️ by Abdullah Fatota</p>
-                </aside>
-            </footer>
-        </>
+            <Footer />
+        </div>
     );
 }
 
