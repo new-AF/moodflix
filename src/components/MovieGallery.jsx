@@ -11,7 +11,7 @@ export const MovieGallery = ({ title, movies }) => {
     return (
         <section className="flex flex-col px-5 mx-auto">
             <h2 className="py-10 font-bold text-2xl">{title}</h2>
-            <ul className="flex flex-wrap gap-10">
+            <ul className="flex flex-wrap gap-10 justify-center">
                 {movies.map((obj, index) => {
                     const { title, image, plot, year } = obj;
 
