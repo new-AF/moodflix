@@ -1,4 +1,5 @@
-import React from "react";
+import { setMood } from "../store/store";
+import { useDispatch } from "react-redux";
 
 const moods = [
     { label: "Happy", emoji: "😊" },
@@ -14,12 +15,17 @@ const moods = [
 ];
 
 export const MoodSelector = () => {
+    const dispatch = useDispatch();
     return (
         <div className="flex flex-col gap-4 justify-center">
             <span className="mx-auto font-bold text-2xl">Select your mood</span>
             <ul className="flex flex-wrap gap-2 justify-center">
                 {moods.map(({ label, emoji }) => (
-                    <button className="daisy-btn daisy-btn-xl">
+                    <button
+                        key={label}
+                        className="daisy-btn daisy-btn-xl"
+                        onClick={() => dispatch(setMood(label))}
+                    >
                         {label} {emoji}
                     </button>
                 ))}
