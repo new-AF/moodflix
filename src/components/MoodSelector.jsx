@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { setMood } from "../app-state/store";
 import { useDispatch } from "react-redux";
 
@@ -16,6 +17,8 @@ const moods = [
 
 export const MoodSelector = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-col gap-4 justify-center">
             <span className="mx-auto font-bold text-2xl">Select your mood</span>
@@ -24,7 +27,10 @@ export const MoodSelector = () => {
                     <button
                         key={label}
                         className="daisy-btn daisy-btn-xl"
-                        onClick={() => dispatch(setMood(label))}
+                        onClick={() => {
+                            navigate("/mood/" + label.toLowerCase());
+                            dispatch(setMood(label));
+                        }}
                     >
                         {label} {emoji}
                     </button>

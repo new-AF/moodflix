@@ -22,7 +22,7 @@ const slice = createSlice({
     /* state updaters/'event' handlers */
     reducers: {
         setMood: (state, action) => {
-            state.mood = action.payload;
+            state.mood = action.payload.toLowerCase();
             state.status = MOOD_SET;
         },
         setMovies: (state, action) => {

@@ -4,7 +4,7 @@ export const transformMovies = (
 ) => {
     const { page, results, total_pages, total_results } = obj;
 
-    /* remap movie object keys */
+    /* re-map movie object keys */
     const movies = results.map((innerObj) => {
         const {
             title,

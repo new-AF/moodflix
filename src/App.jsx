@@ -1,6 +1,15 @@
 import { useEffect } from "react";
 import { mergeClassNames } from "simple-merge-class-names";
+
+import { Header } from "./components/header/Header";
+import { Footer } from "./components/Footer";
+
+/* Observe state */
 import { useSelector, useDispatch } from "react-redux";
+
+import { useLocation, Outlet } from "react-router-dom";
+
+/* Update state */
 import {
     clearMovies,
     setMovies,
@@ -8,23 +17,25 @@ import {
     setAPICallErrored,
     setAPICallSuccessful,
 } from "./app-state/store";
+
+/* Status constants of state */
 import {
     APP_JUST_STARTED,
     API_CALL_IN_PROGRESS,
     API_CALL_SUCCESSFUL,
     API_CALL_ERRORED,
 } from "./app-state/constants/status";
+
+/* Fetch API */
 import { fetchMovies } from "./api/fetchMovies";
 
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { MoodSelector } from "./components/MoodSelector";
-import { MovieGallery } from "./components/MovieGallery";
-import { Footer } from "./components/Footer";
+/* Components */
+import { Landing } from "./page/Landing";
 
-function App() {
-    /* `search` is trimmed automatically */
+export const App = () => {
+    const { pathname } = useLocation();
 
+    /* State */
     const status = useSelector((state) => state.app.status);
     const error = useSelector((state) => state.app.error);
     const mood = useSelector((state) => state.app.mood);
@@ -36,7 +47,7 @@ function App() {
         const { success, data, error } = await fetchMovies();
 
         if (success === false) {
-            dispatch(setAPICallErrored());
+            dispatch(setAPICallErrored(error));
             return;
         }
 
@@ -50,7 +61,7 @@ function App() {
             return;
         }
 
-        fetchAPI();
+        // fetchAPI();
 
         /* run this cleanup function before every re-render */
         return () => dispatch(clearMovies());
@@ -59,54 +70,17 @@ function App() {
     return (
         <div
             className={mergeClassNames(
+                "app",
                 "min-h-dvh",
                 "grid",
                 "grid-rows-[auto_1fr_auto]",
-                "gap-4"
+                "gap-4",
+                "outline"
             )}
         >
-            <header>
-                <Navbar title={"My Moodflix"} />
-                <Hero />
-            </header>
-
-            <main
-                className={mergeClassNames(
-                    "flex",
-                    "flex-col",
-                    "gap-y-10",
-                    "mx-auto"
-                )}
-            >
-                {status === API_CALL_IN_PROGRESS ? (
-                    <span className="daisy-loading daisy-loading-spinner daisy-loading-md"></span>
-                ) : status === API_CALL_ERRORED ? (
-                    <div role="alert" className="daisy-alert daisy-alert-error">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 shrink-0 stroke-current"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-                        <span>{error}</span>
-                    </div>
-                ) : status === API_CALL_SUCCESSFUL ? (
-                    <MovieGallery movies={movies} />
-                ) : (
-                    <MoodSelector />
-                )}
-            </main>
-
+            <Header showHero={pathname === "/"} />
+            <Outlet />
             <Footer />
         </div>
     );
-}
-
-export default App;
+};
