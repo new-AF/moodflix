@@ -1,4 +1,4 @@
-import { setMood } from "../store/store";
+import { setMood } from "../app-state/store";
 import { useDispatch } from "react-redux";
 
 const moods = [

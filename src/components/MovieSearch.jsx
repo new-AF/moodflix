@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { setSearch, setMovies } from "../store/store";
+import { setSearch, setMovies } from "../appState/store";
 import { useSelector, useDispatch } from "react-redux";
 
 export const MovieSearch = () => {

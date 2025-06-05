@@ -1,5 +1,3 @@
-const TMDB_READ_TOKEN = import.meta.env.VITE_TMDB_READ_TOKEN;
-
 import { useEffect } from "react";
 import { mergeClassNames } from "simple-merge-class-names";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,8 +7,14 @@ import {
     setAPICallInProgrss,
     setAPICallErrored,
     setAPICallSuccessful,
-    APP_STATUS_CONSTANTS,
-} from "./store/store";
+} from "./app-state/store";
+import {
+    APP_JUST_STARTED,
+    API_CALL_IN_PROGRESS,
+    API_CALL_SUCCESSFUL,
+    API_CALL_ERRORED,
+} from "./app-state/constants/status";
+import { fetchMovies } from "./api/fetchMovies";
 
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
@@ -27,45 +31,26 @@ function App() {
     const movies = useSelector((state) => state.app.movies);
     const dispatch = useDispatch();
 
-    const getMoviesAPI = async () => {
-        /* TMDB API; query parameter */
-        const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false&with_genres=35`;
+    const fetchAPI = async () => {
+        dispatch(setAPICallInProgrss());
+        const { success, data, error } = await fetchMovies();
 
-        const options = {
-            method: "GET",
-            headers: {
-                accept: "application/json",
-                Authorization: `Bearer ${TMDB_READ_TOKEN}`,
-            },
-        };
-
-        try {
-            dispatch(setAPICallInProgrss());
-            const response = await fetch(url, options);
-
-            if (response.ok === false) {
-                dispatch(setAPICallErrored());
-                return;
-            }
-
-            /* data is an array of movie objects */
-            const data = await response.json();
-            console.info("API results", data);
-
-            dispatch(setAPICallSuccessful());
-            dispatch(setMovies(data));
-        } catch (error) {
-            console.error(error);
+        if (success === false) {
+            dispatch(setAPICallErrored());
+            return;
         }
+
+        dispatch(setAPICallSuccessful());
+        dispatch(setMovies(data));
     };
 
     /* will run once and then every time `mood` changes */
     useEffect(() => {
-        if (status === APP_STATUS_CONSTANTS.APP_JUST_STARTED) {
+        if (status === APP_JUST_STARTED) {
             return;
         }
 
-        getMoviesAPI();
+        fetchAPI();
 
         /* run this cleanup function before every re-render */
         return () => dispatch(clearMovies());
@@ -93,9 +78,9 @@ function App() {
                     "mx-auto"
                 )}
             >
-                {status === APP_STATUS_CONSTANTS.API_CALL_IN_PROGRESS ? (
+                {status === API_CALL_IN_PROGRESS ? (
                     <span className="daisy-loading daisy-loading-spinner daisy-loading-md"></span>
-                ) : status === APP_STATUS_CONSTANTS.API_CALL_ERRORED ? (
+                ) : status === API_CALL_ERRORED ? (
                     <div role="alert" className="daisy-alert daisy-alert-error">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +97,7 @@ function App() {
                         </svg>
                         <span>{error}</span>
                     </div>
-                ) : status === APP_STATUS_CONSTANTS.API_CALL_SUCCESSFUL ? (
+                ) : status === API_CALL_SUCCESSFUL ? (
                     <MovieGallery movies={movies} />
                 ) : (
                     <MoodSelector />

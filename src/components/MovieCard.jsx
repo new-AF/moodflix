@@ -11,7 +11,7 @@ export const MovieCard = ({ image, title, plot, year }) => {
                 <p>{plot}</p>
                 <div className="daisy-card-actions justify-end">
                     <button className="daisy-btn daisy-btn-primary">
-                        Watch
+                        Watch Trailer
                     </button>
                 </div>
             </div>
