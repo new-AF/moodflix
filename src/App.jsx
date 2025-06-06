@@ -18,7 +18,6 @@ export const App = () => {
                 "min-h-dvh",
                 "grid",
                 "grid-rows-[auto_1fr_auto]",
-                "gap-4",
                 "outline"
             )}
         >

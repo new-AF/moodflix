@@ -1,6 +1,6 @@
 export const MovieCard = ({ image, title, plot, year }) => {
     return (
-        <div className="daisy-card bg-base-100 w-96 shadow-sm">
+        <div className="daisy-card bg-base-100 max-w-96 shadow-sm">
             <figure>
                 <img src={image} alt="move poster" />
             </figure>

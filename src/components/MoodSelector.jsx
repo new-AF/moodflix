@@ -10,21 +10,25 @@ export const MoodSelector = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col gap-4 justify-center">
-            <span className="mx-auto font-bold text-2xl">Select your mood</span>
-            <ul className="flex flex-wrap gap-2 justify-center">
-                {moods.map((key) => (
-                    <button
-                        key={key}
-                        className="daisy-btn daisy-btn-xl"
-                        onClick={() => {
-                            navigate("/mood/" + key.toLowerCase());
-                            dispatch(setMood(key));
-                        }}
-                    >
-                        {key} {moodMapping[key].emoji}
-                    </button>
-                ))}
+        <div className="flex flex-col justify-center max-w-lg mx-auto">
+            <h2 className="text-center font-bold text-2xl py-(--custom-spacing-md)">
+                Select your mood
+            </h2>
+            <ul className="flex flex-wrap gap-(--custom-spacing-xs) justify-center">
+                {moods.map((key) => {
+                    const emoji = moodMapping[key].emoji;
+                    return (
+                        <button
+                            key={key}
+                            className="daisy-btn daisy-btn-xl"
+                            onClick={() => {
+                                navigate("/mood/" + key.toLowerCase());
+                            }}
+                        >
+                            {key} {emoji}
+                        </button>
+                    );
+                })}
             </ul>
         </div>
     );

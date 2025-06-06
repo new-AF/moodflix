@@ -1,5 +1,5 @@
 import { mergeClassNames } from "simple-merge-class-names";
-import { ErrorAlert } from "../components/ErrorAlert";
+import { ErrorAlert } from "../components/ui/ErrorAlert";
 import { MoodSelector } from "../components/MoodSelector";
 import { useSelector } from "react-redux";
 import {
@@ -15,14 +15,7 @@ export const Landing = () => {
 
     return (
         <>
-            <main
-                className={mergeClassNames(
-                    "flex",
-                    "flex-col",
-                    "gap-y-10",
-                    "mx-auto"
-                )}
-            >
+            <main className={mergeClassNames()}>
                 <MoodSelector />
             </main>
         </>

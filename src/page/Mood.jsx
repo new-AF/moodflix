@@ -21,8 +21,9 @@ import {
     API_CALL_SUCCESSFUL,
 } from "../app-state/constants/status";
 
-import { MovieGallery } from "../components/MovieGallery";
-import { ErrorAlert } from "../components/ErrorAlert";
+import { MovieGallery } from "../components/movie/MovieGallery";
+import { ErrorAlert } from "../components/ui/ErrorAlert";
+import { FetchingMoviesLoader } from "../components/ui/FetchingMoviesLoader";
 
 export const Mood = () => {
     const { mood } = useParams();
@@ -36,6 +37,7 @@ export const Mood = () => {
         // Set the current mood in the state
         dispatch(setMood(mood));
         dispatch(setAPICallInProgrss());
+        // return;
 
         const { success, data, error } = await fetchMood(mood);
 
@@ -58,14 +60,17 @@ export const Mood = () => {
     }, [mood]);
 
     return (
-        <div>
+        <div className="flex flex-col justify-start py-[2rem]">
             {
                 {
-                    API_CALL_IN_PROGRESS: (
-                        <span className="daisy-loading daisy-loading-spinner daisy-loading-md"></span>
-                    ),
+                    API_CALL_IN_PROGRESS: <FetchingMoviesLoader />,
                     API_CALL_ERRORED: <ErrorAlert error={error} />,
-                    API_CALL_SUCCESSFUL: <MovieGallery movies={movies} />,
+                    API_CALL_SUCCESSFUL: (
+                        <MovieGallery
+                            movies={movies}
+                            title={"Movies for " + mood + " mood"}
+                        />
+                    ),
                 }[status]
             }
         </div>

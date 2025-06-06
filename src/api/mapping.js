@@ -12,7 +12,7 @@ import {
     CRIME,
     FANTASY,
     SCI_FI,
-} from "./genres";
+} from "./constants/genres";
 
 /* map mood -> select genres */
 export const moodMapping = {
@@ -22,7 +22,7 @@ export const moodMapping = {
     scared: { genres: [ANIMATION], emoji: "😨" },
     thoughtful: { genres: [DOCUMENTARY], emoji: "🤔" },
     laughing: { genres: [COMEDY], emoji: "🤣" },
-    "in love": { genres: [ROMANCE], emoji: "😍" },
+    love: { genres: [ROMANCE], emoji: "😍" },
     cool: { genres: [ACTION], emoji: "😎" },
     bored: { genres: [ADVENTURE], emoji: "🥱" },
     sleepy: { genres: [ANIMATION], emoji: "😴" },
