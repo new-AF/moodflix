@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { moodMapping } from "../api/mapping";
 import { capitalizeString } from "../utils";
 
 const moods = Object.keys(moodMapping);
 
 export const MoodSelector = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     return (
