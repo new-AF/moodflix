@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { setMood } from "../app-state/store";
 import { useDispatch } from "react-redux";
 import { moodMapping } from "../api/mapping";
+import { capitalizeString } from "../utils";
 
 const moods = Object.keys(moodMapping);
 
@@ -17,6 +17,7 @@ export const MoodSelector = () => {
             <ul className="flex flex-wrap gap-(--custom-spacing-xs) justify-center">
                 {moods.map((key) => {
                     const emoji = moodMapping[key].emoji;
+                    const moodCapitalized = capitalizeString(key);
                     return (
                         <button
                             key={key}
@@ -25,7 +26,7 @@ export const MoodSelector = () => {
                                 navigate("/mood/" + key.toLowerCase());
                             }}
                         >
-                            {key} {emoji}
+                            {moodCapitalized} {emoji}
                         </button>
                     );
                 })}

@@ -27,6 +27,8 @@ import { FetchingMoviesLoader } from "../components/ui/FetchingMoviesLoader";
 
 export const Mood = () => {
     const { mood } = useParams();
+    const moodCapitalized = useSelector((state) => state.app.moodCapitalized);
+    const emoji = useSelector((state) => state.app.emoji);
     const error = useSelector((state) => state.app.error);
     const movies = useSelector((state) => state.app.movies);
     const status = useSelector((state) => state.app.status);
@@ -68,7 +70,7 @@ export const Mood = () => {
                     API_CALL_SUCCESSFUL: (
                         <MovieGallery
                             movies={movies}
-                            title={"Movies for " + mood + " mood"}
+                            title={`Movies for ${moodCapitalized} Mood ${emoji}`}
                         />
                     ),
                 }[status]

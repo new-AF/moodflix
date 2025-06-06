@@ -1,5 +1,7 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { transformMovies } from "../api/transformMovies";
+import { moodMapping } from "../api/mapping";
+
 import {
     MOOD_SET,
     APP_JUST_STARTED,
@@ -7,9 +9,12 @@ import {
     API_CALL_SUCCESSFUL,
     API_CALL_ERRORED,
 } from "./constants/status";
+import { capitalizeString } from "../utils";
 
 const initialState = {
     mood: undefined,
+    moodCapitalized: undefined,
+    emoji: undefined,
     status: APP_JUST_STARTED,
     error: undefined,
     movies: [],
@@ -22,15 +27,18 @@ const slice = createSlice({
     /* state updaters/'event' handlers */
     reducers: {
         setMood: (state, action) => {
-            state.mood = action.payload.toLowerCase();
+            const originalMood = action.payload;
+            const mood = originalMood.toLowerCase();
+            const emoji = moodMapping[mood].emoji;
+
             state.status = MOOD_SET;
+            state.mood = mood;
+            state.moodCapitalized = capitalizeString(mood);
+            state.emoji = emoji;
         },
         /* useEffect cleanup function, clear movies before next re-render */
         clearMovies: (state) => {
             state.movies = [];
-        },
-        clearMood: (state) => {
-            state.mood = undefined;
         },
         /* user is typing */
         setAPICallInProgrss: (state) => {
