@@ -23,17 +23,7 @@ export const Landing = () => {
                     "mx-auto"
                 )}
             >
-                {/* conditional render; default <MoodSelector />  */}
-                {
-                    {
-                        APP_JUST_STARTED: <MoodSelector />,
-                        MOOD_SET: <MoodSelector />,
-                        API_CALL_IN_PROGRESS: (
-                            <span className="daisy-loading daisy-loading-spinner daisy-loading-md"></span>
-                        ),
-                        API_CALL_ERRORED: <ErrorAlert error={error} />,
-                    }[status]
-                }
+                <MoodSelector />
             </main>
         </>
     );

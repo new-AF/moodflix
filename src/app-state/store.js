@@ -25,20 +25,21 @@ const slice = createSlice({
             state.mood = action.payload.toLowerCase();
             state.status = MOOD_SET;
         },
-        setMovies: (state, action) => {
-            state.movies = transformMovies(action.payload);
-        },
         /* useEffect cleanup function, clear movies before next re-render */
         clearMovies: (state) => {
             state.movies = [];
+        },
+        clearMood: (state) => {
+            state.mood = undefined;
         },
         /* user is typing */
         setAPICallInProgrss: (state) => {
             state.status = API_CALL_IN_PROGRESS;
         },
         /* API fetch completed successfully */
-        setAPICallSuccessful: (state) => {
+        setAPICallSuccessful: (state, action) => {
             state.status = API_CALL_SUCCESSFUL;
+            state.movies = transformMovies(action.payload);
         },
         /* API fetch errored  */
         setAPICallErrored: (state, action) => {
@@ -58,7 +59,6 @@ export const store = configureStore({
 /* export state updaters */
 export const {
     setMood,
-    setMovies,
     clearMovies,
     setAPICallInProgrss,
     setAPICallSuccessful,

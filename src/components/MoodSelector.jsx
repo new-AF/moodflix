@@ -1,19 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { setMood } from "../app-state/store";
 import { useDispatch } from "react-redux";
+import { moodMapping } from "../api/mapping";
 
-const moods = [
-    { label: "Happy", emoji: "😊" },
-    { label: "Sad", emoji: "😢" },
-    { label: "Angry", emoji: "😡" },
-    { label: "Scared", emoji: "😨" },
-    { label: "Thoughtful", emoji: "🤔" },
-    { label: "Laughing", emoji: "🤣" },
-    { label: "In Love", emoji: "😍" },
-    { label: "Cool", emoji: "😎" },
-    { label: "Bored", emoji: "🥱" },
-    { label: "Sleepy", emoji: "😴" },
-];
+const moods = Object.keys(moodMapping);
 
 export const MoodSelector = () => {
     const dispatch = useDispatch();
@@ -23,16 +13,16 @@ export const MoodSelector = () => {
         <div className="flex flex-col gap-4 justify-center">
             <span className="mx-auto font-bold text-2xl">Select your mood</span>
             <ul className="flex flex-wrap gap-2 justify-center">
-                {moods.map(({ label, emoji }) => (
+                {moods.map((key) => (
                     <button
-                        key={label}
+                        key={key}
                         className="daisy-btn daisy-btn-xl"
                         onClick={() => {
-                            navigate("/mood/" + label.toLowerCase());
-                            dispatch(setMood(label));
+                            navigate("/mood/" + key.toLowerCase());
+                            dispatch(setMood(key));
                         }}
                     >
-                        {label} {emoji}
+                        {key} {moodMapping[key].emoji}
                     </button>
                 ))}
             </ul>

@@ -1,0 +1,31 @@
+const genres = {
+    ADVENTURE: 12,
+    COMEDY: 35,
+    DRAMA: 18,
+    ACTION: 28,
+    HORROR: 27,
+    THRILLER: 53,
+    ROMANCE: 10749,
+    ANIMATION: 16,
+    FAMILY: 10751,
+    DOCUMENTARY: 99,
+    CRIME: 80,
+    FANTASY: 14,
+    SCI_FI: 878,
+};
+
+export const {
+    ADVENTURE,
+    COMEDY,
+    DRAMA,
+    ACTION,
+    HORROR,
+    THRILLER,
+    ROMANCE,
+    ANIMATION,
+    FAMILY,
+    DOCUMENTARY,
+    CRIME,
+    FANTASY,
+    SCI_FI,
+} = genres;
