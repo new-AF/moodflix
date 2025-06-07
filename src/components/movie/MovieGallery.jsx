@@ -9,7 +9,7 @@ movies shape: array of objects:
 */
 export const MovieGallery = ({ title, movies }) => {
     return (
-        <section className="flex flex-col px-5 mx-auto">
+        <section className="flex flex-col mx-auto">
             <h2 className="pb-[3rem] font-bold text-2xl text-center">
                 {title}
             </h2>

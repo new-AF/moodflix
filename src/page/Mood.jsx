@@ -42,7 +42,6 @@ export const Mood = () => {
         // return;
 
         const { success, data, error } = await fetchMood(mood);
-
         // console.log("[App.jsx/fetchAPI]", { success, data, error  });
 
         if (success === false) {
@@ -62,7 +61,7 @@ export const Mood = () => {
     }, [mood]);
 
     return (
-        <div className="flex flex-col justify-start py-[2rem]">
+        <div className="flex flex-col justify-start py-[2rem] px-(--custom-spacing-md)">
             {
                 {
                     API_CALL_IN_PROGRESS: <FetchingMoviesLoader />,
