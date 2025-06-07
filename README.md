@@ -1,12 +1,28 @@
-# React + Vite
+# Moodflix (BETA)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Moodflix is a hobby/experimental project that recommends movies based on user mood in order to gently uplift their emotional state. It is not intended for therapeutic purposes or to provide medical advice.
 
-Currently, two official plugins are available:
+## API & Algorithm
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Data is powered by the [TMDB API](https://www.themoviedb.org/). The project's core recommendation logic is a straightforward **mood-to-genre mapping** defined in `api/mapping.js`. This algorithm takes a user's selected mood and, at the moment, translates it into a single corresponding movie genre.
 
-## Expanding the ESLint configuration
+For example:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Happy mood 😊 → Comedy movies
+- Sad mood 😢 → Drama movies
+- Angry mood 😡 → Action movies
+- Scared mood 😨 → Animation movies
+- Thoughtful mood 🤔 → Documentary movies
+- Laughing mood 🤣 → Comedy movies
+- Love mood 😍 → Romance movies
+- Cool mood 😎 → Action movies
+- Bored mood 🥱 → Adventure movies
+- Sleepy mood 😴 → Animation movies
+
+Movies are then fetched from TMDB based on these determined genres, and subsequently sorted in descending order by revenue (as determined by TMDB).
+
+## Tech Stack
+
+- **Frontend:** React, React Router v7
+- **Styling:** Daisy UI, Tailwind CSS
+- **Data:** TMDB API

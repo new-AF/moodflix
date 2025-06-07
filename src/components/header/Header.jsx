@@ -4,7 +4,7 @@ import { Hero } from "./Hero";
 export const Header = ({ showHero }) => {
     return (
         <header>
-            <Navbar title={"My Moodflix"} />
+            <Navbar />
             {showHero && <Hero />}
         </header>
     );
