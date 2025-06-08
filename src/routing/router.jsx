@@ -7,6 +7,7 @@ import { Landing } from "../page/Landing";
 /* routing */
 export const router = createBrowserRouter([
     {
+        basename: "/moodflix", // for deployment
         path: "/",
         element: <App />,
         children: [
