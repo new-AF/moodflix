@@ -27,8 +27,8 @@ importers:
         specifier: ^7.6.2
         version: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       simple-merge-class-names:
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^2.0.0
+        version: 2.0.2
       tailwindcss:
         specifier: ^4.1.7
         version: 4.1.7
@@ -1291,8 +1291,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  simple-merge-class-names@1.0.0:
-    resolution: {integrity: sha512-IyBej/q14xWAXuCEf0GP3cBso14aks+hxP+4ucr4d6KMXFVrxBNmovEBhWNZUSG50aqp59M8T2wg4Ez9e2BrPg==}
+  simple-merge-class-names@2.0.2:
+    resolution: {integrity: sha512-WNEp7Bxf6YvGdzIMkLZxiZ3SFMjs7zpXcPxeYFSfYo1rg6n32fia6GJz0FaXwQ2Amp6I1qO/frIlKBkKnebUkA==}
 
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
@@ -2519,7 +2519,7 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  simple-merge-class-names@1.0.0: {}
+  simple-merge-class-names@2.0.2: {}
 
   slash@3.0.0: {}
 

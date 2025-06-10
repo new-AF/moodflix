@@ -19,7 +19,7 @@
         "react-dom": "^19.1.0",
         "react-redux": "^9.2.0",
         "react-router-dom": "^7.6.2",
-        "simple-merge-class-names": "^1.0.0",
+        "simple-merge-class-names": "^2.0.0",
         "tailwindcss": "^4.1.7"
     },
     "devDependencies": {

@@ -6,8 +6,6 @@ import { Footer } from "./components/Footer";
 
 import { useLocation, Outlet } from "react-router-dom";
 
-/* Fetch API */
-
 export const App = () => {
     const { pathname } = useLocation();
 
