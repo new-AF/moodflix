@@ -66,13 +66,13 @@ Because I'm not a UI designer, I followed best practices and used a predefined d
 
 # State Management
 
-Unlike styling, I paid a premium to get the global app state management working properly. This is because I wanted a solution that scales regardless of the complexity of the application. While `jsx: useState()` is doable for such a small project, it introduces technical debt that compounds as changes are needed to the application. This is because the state or multiple needed states would have to be `prop drilled` across different components in the application, which is an error-prone process. `jsx: useState` is really meant for local component state management only.
+Unlike styling, I paid a premium to get the global app state management working properly. This is because I wanted a solution that scales regardless of the complexity of the application. While `useState()` is doable for such a small project, it introduces technical debt that compounds as changes are needed to the application. This is because the state or multiple needed states would have to be `prop drilled` across different components in the application, which is an error-prone process. `useState` is really meant for local component state management only.
 
 React, unlike some other frameworks (Solid.js), doesn't include built-in global state handling. To address this, I chose `Redux Toolkit`. It centralizes the app's state, has a straightforward mental model for how to update the state, and allows components to access and update the state efficiently. The main drawback is the amount of boilerplate code still required to set it up.
 
 The workflow is illustrated below and mainly relies on `useEffect()` to call the API and update the central state whenever `mood` changes, which is then reflected immediately by all components which consume the state.
 
-![App State Management]("https://raw.githubusercontent.com/new-AF/moodflix/main/.github/images/state diagram.png")
+![App State Management](https://raw.githubusercontent.com/new-AF/moodflix/main/.github/images/state%20diagram.png)
 
 ```jsx
 import { useParams } from "react-router-dom";
