@@ -24,37 +24,16 @@ The user then selects the mood that best aligns with their emotional state and s
 
 I opted for a straightforward algorithm that maps the user's mood to a specific movie genre. For example, selecting the "happy" mood shows Comedy movies. Here's the mapping:
 
-```js
-import {
-    ADVENTURE,
-    COMEDY,
-    DRAMA,
-    ACTION,
-    HORROR,
-    THRILLER,
-    ROMANCE,
-    ANIMATION,
-    FAMILY,
-    DOCUMENTARY,
-    CRIME,
-    FANTASY,
-    SCI_FI,
-} from "./constants/genres";
-
-/* map mood -> select genres */
-export const moodMapping = {
-    happy: { genres: [COMEDY], emoji: "😊" },
-    sad: { genres: [DRAMA], emoji: "😢" },
-    angry: { genres: [ACTION], emoji: "😡" },
-    scared: { genres: [ANIMATION], emoji: "😨" },
-    thoughtful: { genres: [DOCUMENTARY], emoji: "🤔" },
-    laughing: { genres: [COMEDY], emoji: "🤣" },
-    love: { genres: [ROMANCE], emoji: "😍" },
-    cool: { genres: [ACTION], emoji: "😎" },
-    bored: { genres: [ADVENTURE], emoji: "🥱" },
-    sleepy: { genres: [ANIMATION], emoji: "😴" },
-};
-```
+-   Happy mood 😊 → Comedy moviesMore actions
+-   Sad mood 😢 → Drama movies
+-   Angry mood 😡 → Action movies
+-   Scared mood 😨 → Animation movies
+-   Thoughtful mood 🤔 → Documentary movies
+-   Laughing mood 🤣 → Comedy movies
+-   Love mood 😍 → Romance movies
+-   Cool mood 😎 → Action movies
+-   Bored mood 🥱 → Adventure movies
+-   Sleepy mood 😴 → Animation movies
 
 # Movies Data
 
