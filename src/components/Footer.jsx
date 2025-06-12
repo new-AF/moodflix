@@ -6,7 +6,10 @@ export const Footer = () => {
             <aside>
                 <p>
                     Made with ❤️ by{" "}
-                    <Link className="underline" to="https://github.com/new-AF">
+                    <Link
+                        className="underline"
+                        to="https://github.com/new-AF/moodflix"
+                    >
                         Abdullah Fatota
                     </Link>
                 </p>
