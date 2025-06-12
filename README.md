@@ -24,7 +24,7 @@ The user then selects the mood that best aligns with their emotional state and s
 
 I opted for a straightforward algorithm that maps the user's mood to a specific movie genre. For example, selecting the "happy" mood shows Comedy movies. Here's the mapping:
 
--   Happy mood 😊 → Comedy moviesMore actions
+-   Happy mood 😊 → Comedy movies
 -   Sad mood 😢 → Drama movies
 -   Angry mood 😡 → Action movies
 -   Scared mood 😨 → Animation movies
