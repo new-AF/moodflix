@@ -15,7 +15,7 @@ export const MovieGallery = ({ title, movies }) => {
             </h2>
             <ul className="flex flex-wrap gap-10 justify-center">
                 {movies.map((obj, index) => {
-                    const { title, image, plot, year } = obj;
+                    const { title, image, plot, year, youtubeLink } = obj;
 
                     return (
                         <li key={title + " " + index}>
@@ -24,6 +24,7 @@ export const MovieGallery = ({ title, movies }) => {
                                 image={image}
                                 plot={plot}
                                 year={year}
+                                youtubeLink={youtubeLink}
                             />
                         </li>
                     );

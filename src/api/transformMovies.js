@@ -11,6 +11,7 @@ export const transformMovies = (
             release_date: date,
             overview: plot,
             poster_path,
+            youtubeLink,
         } = innerObj;
         const year = date.split("-").at(0);
         const image = imagesBaseUrl + poster_path;
@@ -19,6 +20,7 @@ export const transformMovies = (
             year,
             plot,
             image,
+            youtubeLink,
         };
         return newObj;
     });

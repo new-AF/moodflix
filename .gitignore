@@ -29,3 +29,9 @@ dist-ssr
 
 # joureny file
 /journey.md
+
+# ignore any file starting with "ignore..."
+**/ignore*
+
+
+**/ai.js

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const MovieCard = ({ image, title, plot, year }) => {
+export const MovieCard = ({ image, title, plot, year, youtubeLink }) => {
     const newTitle = `${title} (${year})`;
 
     const [isCopied, setIsCopied] = useState(false);
@@ -72,9 +72,30 @@ export const MovieCard = ({ image, title, plot, year }) => {
 
                 {/* watch trailer  */}
                 <div className="daisy-card-actions justify-end">
-                    <button className="daisy-btn daisy-btn-primary">
-                        Watch Trailer
-                    </button>
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={[
+                            "daisy-btn daisy-btn-primary",
+                            youtubeLink === undefined
+                                ? "daisy-btn-disabled"
+                                : "",
+                        ].join(" ")}
+                        href={youtubeLink}
+                    >
+                        Watch Trailer{" "}
+                        <svg
+                            className="w-4 h-4"
+                            stroke="currentColor"
+                            fill="currentColor"
+                            strokeWidth="0"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path fill="none" d="M0 0h24v24H0z"></path>
+                            <path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
